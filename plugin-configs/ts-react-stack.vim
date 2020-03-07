@@ -3,7 +3,6 @@
 Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'} 
 
 " coc extensions 
-"let g:coc_global_extensions = ['coc-tslint-plugin', 'coc-tsserver', 'coc-emmet', 'coc-css', 'coc-html', 'coc-json', 'coc-yank', 'coc-prettier', 'coc-omni'] 
 let g:coc_global_extensions = ['coc-eslint', 'coc-tsserver', 'coc-emmet', 'coc-css', 'coc-html', 'coc-json', 'coc-yank', 'coc-prettier'] 
 nnoremap <leader>p :CocCommand prettier.formatFile<CR>
 nnoremap <leader>a :CocAction<CR>
@@ -32,15 +31,5 @@ inoremap <silent><expr> <Tab>
 " Add syntax higlightning for comments inside json files
 autocmd FileType json syntax match Comment +\/\/.\+$+
 
-"------------------------ VIM TSX ------------------------
-" by default, if you open tsx file, neovim does not show syntax colors 
-" vim-tsx will do all the coloring for jsx in the .tsx file 
-" Plug 'ianks/vim-tsx' 
-
-"------------------------ VIM TSX ------------------------
-" by default, if you open tsx file, neovim does not show syntax colors "
-" typescript-vim will do all the coloring for typescript keywords 
-" Plug 'leafgarland/typescript-vim' 
-
-
+"" Syntax highlight for typescript
 Plug 'HerringtonDarkholme/yats.vim'
