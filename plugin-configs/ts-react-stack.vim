@@ -33,3 +33,5 @@ autocmd FileType json syntax match Comment +\/\/.\+$+
 
 "" Syntax highlight for typescript
 Plug 'HerringtonDarkholme/yats.vim'
+
+Plug 'styled-components/vim-styled-components', { 'branch': 'main' }

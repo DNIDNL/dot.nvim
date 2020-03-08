@@ -30,6 +30,9 @@ call plug#begin('$LOCALAPPDATA\nvim\plugged')
 
       source $LOCALAPPDATA/nvim/plugin-configs/ts-react-stack.vim
 
+      "" Git support
+      Plug 'tpope/vim-fugitive'
+
       if has('nvim') || has('patch-8.0.902')
         Plug 'mhinz/vim-signify'
       else
@@ -42,12 +45,14 @@ call plug#begin('$LOCALAPPDATA\nvim\plugged')
       """ NERDTree
       Plug 'preservim/nerdtree'
       Plug 'Xuyuanp/nerdtree-git-plugin'
-
       let NERDTreeShowHidden=1
+
+      Plug 'ryanoasis/vim-devicons'
+      set encoding=UTF-8
+
 
       """ Unix like operations
       Plug 'tpope/vim-eunuch'
-      Plug 'tpope/vim-fugitive'
 
       """ Move codeblocks around
       Plug 'matze/vim-move'
@@ -76,9 +81,6 @@ call plug#begin('$LOCALAPPDATA\nvim\plugged')
       if executable("rg")
          :let $FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
       endif
-
-      Plug 'ryanoasis/vim-devicons'
-      set encoding=UTF-8
 
       Plug 'junegunn/limelight.vim'
       let g:limelight_paragraph_span = 1
@@ -116,6 +118,7 @@ nnoremap <C-f> :BLines<CR>
 """ NERDTree
 nnoremap <C-b> :NERDTreeToggle<CR>
 nnoremap <C-b>l :NERDTreeFind<CR>
+autocmd VimEnter * NERDTree | wincmd w
 
 """ Save and quit
 nnoremap <leader>w :w<CR>
@@ -140,6 +143,10 @@ command CDC cd %:p:h
 "" 256 color support
 execute "set t_8f=\e[38;2;%lu;%lu;%lum"
 execute "set t_8b=\e[48;2;%lu;%lu;%lum"
+
+"" Fugitive split window vertical
+:set diffopt+=vertical
+
 
 ""Split modes
 set splitbelow
@@ -176,7 +183,8 @@ set clipboard=unnamedplus
 
 :highlight Directory guifg=#AAAAAA ctermfg=grey
 ":autocmd UIEnter * GuiPopupmenu 0
-:autocmd UIEnter * GuiFont FiraCode\ NF:h12
+:autocmd UIEnter * GuiFont! FiraCode\ NF:h12
 :autocmd UIEnter * GuiTabline 0
 " set guifont=FiraCode\ NF:h12
 "let g:enable_bold_font = 0
+
