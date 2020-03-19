@@ -62,6 +62,7 @@ call plug#begin('$LOCALAPPDATA\nvim\plugged')
       Plug 'vim-airline/vim-airline-themes'
       let g:airline_theme = 'bubblegum'
       let g:airline_powerline_fonts = 1
+      let g:airline#extensions#tabline#enabled = 1
 
       """ Themes
       "Plug 'rafi/awesome-vim-colorschemes'
@@ -133,6 +134,9 @@ nnoremap <leader>rc :e $LOCALAPPDATA\nvim\init.vim<CR>
 """ Load config
 nnoremap <leader>vim :source $LOCALAPPDATA\nvim\init.vim<CR>
 
+"""Ctrl-tab like windows
+nnoremap <C-Tab> :bn<cr>
+
 """" Fuzzy finder
 command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, '--color-path="0;33"', <bang>0)
 
@@ -176,13 +180,20 @@ set nowrap
 "" Clipboard
 set clipboard=unnamedplus
 
+"coc-vim stuff
+set cmdheight=2
+set nobackup
+set nowritebackup
+set updatetime=300
+set signcolumn=yes
+inoremap <silent><expr> <c-space> coc#refresh()
 
 " == AUTOCMD END ================================
 
 :colorscheme monokai
 
 :highlight Directory guifg=#AAAAAA ctermfg=grey
-":autocmd UIEnter * GuiPopupmenu 0
+:autocmd UIEnter * GuiPopupmenu 0
 :autocmd UIEnter * GuiFont! FiraCode\ NF:h12
 :autocmd UIEnter * GuiTabline 0
 " set guifont=FiraCode\ NF:h12
