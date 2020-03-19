@@ -1,4 +1,11 @@
 "------------------------ COC ----------------------- 
+
+set cmdheight=2
+set nobackup
+set nowritebackup
+set updatetime=300
+set signcolumn=yes
+
 " coc for tslinting, auto complete and prettier
 Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'} 
 
@@ -18,6 +25,7 @@ au BufNewFile,BufRead *.tsx
 
 au BufNewFile,BufRead *.ts setlocal filetype=typescript 
 au BufNewFile,BufRead *.tsx setlocal filetype=typescript.tsx 
+
 
 " use <tab> for trigger completion and navigate to the next complete item
 function! s:check_back_space() abort
@@ -39,6 +47,8 @@ inoremap <silent><expr> <Tab>
       \ pumvisible() ? "\<C-n>" :
       \ <SID>check_back_space() ? "\<Tab>" :
       \ coc#refresh()
+
+inoremap <silent><expr> <c-space> coc#refresh()
 
 " Add syntax higlightning for comments inside json files
 autocmd FileType json syntax match Comment +\/\/.\+$+

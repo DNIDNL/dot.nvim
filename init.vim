@@ -180,14 +180,6 @@ set nowrap
 "" Clipboard
 set clipboard=unnamedplus
 
-"coc-vim stuff
-set cmdheight=2
-set nobackup
-set nowritebackup
-set updatetime=300
-set signcolumn=yes
-inoremap <silent><expr> <c-space> coc#refresh()
-
 " == AUTOCMD END ================================
 
 :colorscheme monokai
