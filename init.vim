@@ -30,6 +30,9 @@ call plug#begin('$LOCALAPPDATA\nvim\plugged')
 
       source $LOCALAPPDATA/nvim/plugin-configs/ts-react-stack.vim
 
+      "" Multiple cursors
+      Plug 'terryma/vim-multiple-cursors'
+
       "" Git support
       Plug 'tpope/vim-fugitive'
 
@@ -80,12 +83,13 @@ call plug#begin('$LOCALAPPDATA\nvim\plugged')
       Plug 'junegunn/fzf.vim'
 
       if executable("rg")
-         :let $FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
+         :let $FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!node_modules/*" --glob "!.git/*"'
       endif
 
       Plug 'junegunn/limelight.vim'
       let g:limelight_paragraph_span = 1
 
+      Plug 'qpkorr/vim-bufkill'
 call plug#end()
 
 "" Buffer management
@@ -109,10 +113,10 @@ nnoremap gv :vsplit<CR>
 nnoremap gt :bn<CR>
 "nnoremap gT :ls<CR>:b<Space>
 nnoremap gT :Buffers<CR>
-nnoremap gc :bd!<CR>
+nnoremap gc :BD<CR>
 
 """" Fuzzy finder
-nnoremap <C-t> :Ag<CR>
+nnoremap <C-t> :Rg<CR>
 nnoremap <C-p> :Files<CR>
 nnoremap <C-f> :BLines<CR>
 
@@ -131,17 +135,19 @@ cmap <Esc> :noh<CR>
 "" Shortcuts
 """ Edit config
 nnoremap <leader>rc :e $LOCALAPPDATA\nvim\init.vim<CR>
+nnoremap <leader>ts :e $LOCALAPPDATA/nvim/plugin-configs/ts-react-stack.vim<CR>
 """ Load config
 nnoremap <leader>vim :source $LOCALAPPDATA\nvim\init.vim<CR>
 
 """Ctrl-tab like windows
 nnoremap <C-Tab> :bn<cr>
 
-"""" Fuzzy finder
-command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, '--color-path="0;33"', <bang>0)
 
 """" Set local directory
 command CDC cd %:p:h
+
+"""" Fuzzy finder
+command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, '--color-path="0;33"', <bang>0)
 
 " General editor config
 "" 256 color support
@@ -186,8 +192,33 @@ set clipboard=unnamedplus
 
 :highlight Directory guifg=#AAAAAA ctermfg=grey
 :autocmd UIEnter * GuiPopupmenu 0
-:autocmd UIEnter * GuiFont! FiraCode\ NF:h12
+:autocmd UIEnter * GuiFont! FiraCode\ NF:h11
 :autocmd UIEnter * GuiTabline 0
 " set guifont=FiraCode\ NF:h12
 "let g:enable_bold_font = 0
+
+
+
+
+
+""" FZF function for delete buffers
+function! s:list_buffers()
+  redir => list
+  silent ls
+  redir END
+  return split(list, "\n")
+endfunction
+
+function! s:delete_buffers(lines)
+  execute 'bwipeout' join(map(a:lines, {_, line -> split(line)[0]}))
+endfunction
+
+command! BDS call fzf#run(fzf#wrap({
+  \ 'source': s:list_buffers(),
+  \ 'sink*': { lines -> s:delete_buffers(lines) },
+  \ 'options': '--multi --reverse --bind ctrl-a:select-all+accept'
+  \ }))
+
+
+
 

@@ -1,6 +1,6 @@
 "------------------------ COC ----------------------- 
 
-set cmdheight=2
+set cmdheight=1
 set nobackup
 set nowritebackup
 set updatetime=300
@@ -14,6 +14,7 @@ let g:coc_global_extensions = ['coc-eslint', 'coc-tsserver', 'coc-emmet', 'coc-c
 nnoremap <leader>p :CocCommand prettier.formatFile<CR>
 nnoremap <C-k><C-d> :CocCommand prettier.formatFile<CR>
 nnoremap <leader>a :CocAction<CR>
+nmap <A-Cr> <Plug>(coc-fix-current)
 
 " Remap keys for gotos and set correct filetype
 au BufNewFile,BufRead *.tsx
