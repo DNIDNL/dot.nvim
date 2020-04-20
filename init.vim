@@ -4,6 +4,7 @@
 "" General
 let mapleader = ";"
 set list
+set timeoutlen=300 ttimeoutlen=200
 
 " Load plugins
 " == VIM PLUG ================================
@@ -63,17 +64,18 @@ call plug#begin('$LOCALAPPDATA\nvim\plugged')
       """ Theming plugins
       Plug 'vim-airline/vim-airline'
       Plug 'vim-airline/vim-airline-themes'
-      let g:airline_theme = 'bubblegum'
+      " let g:airline_theme = 'bubblegum'
+      let g:airline_theme = 'deus'
       let g:airline_powerline_fonts = 1
       let g:airline#extensions#tabline#enabled = 1
+      " let g:airline#extensions#tabline#formatter = 'default'
+      let g:airline#extensions#tabline#formatter = 'jsformatter'
+      let g:airline#extensions#tabline#left_sep = ' '
+      let g:airline#extensions#tabline#left_alt_sep = '|'
 
-      """ Themes
-      "Plug 'rafi/awesome-vim-colorschemes'
-      "Plug 'mcmartelle/vim-monokai-bold'
-
-      "Plug 'sickill/vim-monokai'
-      "let g:molokai_original = 1
-      " let g:rehash256 = 1
+      let g:airline#extensions#tabline#show_splits = 0  " enable/disable displaying open splits per tab (only when tabs are opened). >
+      let g:airline#extensions#tabline#show_buffers = 1 " enable/disable displaying buffers with a single tab
+      let g:airline#extensions#tabline#tab_nr_type = 1  " tab number
 
       Plug 'tomasr/molokai'
       Plug 'crusoexia/vim-monokai'
@@ -123,11 +125,15 @@ nnoremap <C-f> :BLines<CR>
 """ NERDTree
 nnoremap <C-b> :NERDTreeToggle<CR>
 nnoremap <C-b>l :NERDTreeFind<CR>
+
 autocmd VimEnter * NERDTree | wincmd w
 
 """ Save and quit
 nnoremap <leader>w :w<CR>
 nnoremap <leader>q :q<CR>
+nnoremap gq :q<CR>
+
+map - /
 
 "" Clear find selection
 cmap <Esc> :noh<CR>
@@ -218,7 +224,4 @@ command! BDS call fzf#run(fzf#wrap({
   \ 'sink*': { lines -> s:delete_buffers(lines) },
   \ 'options': '--multi --reverse --bind ctrl-a:select-all+accept'
   \ }))
-
-
-
 
