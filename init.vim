@@ -4,7 +4,7 @@
 "" General
 let mapleader = ";"
 set list
-set timeoutlen=300 ttimeoutlen=200
+set timeoutlen=300 ttimeoutlen=300
 
 " Load plugins
 " == VIM PLUG ================================
@@ -30,6 +30,8 @@ endif
 call plug#begin('$LOCALAPPDATA\nvim\plugged')
 
       source $LOCALAPPDATA/nvim/plugin-configs/ts-react-stack.vim
+      source $LOCALAPPDATA/nvim/plugin-configs/font-settings.vim
+
 
       "" Multiple cursors
       Plug 'terryma/vim-multiple-cursors'
@@ -69,13 +71,18 @@ call plug#begin('$LOCALAPPDATA\nvim\plugged')
       let g:airline_powerline_fonts = 1
       let g:airline#extensions#tabline#enabled = 1
       " let g:airline#extensions#tabline#formatter = 'default'
-      let g:airline#extensions#tabline#formatter = 'jsformatter'
+      " let g:airline#extensions#tabline#formatter = 'jsformatter'
+      let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
       let g:airline#extensions#tabline#left_sep = ' '
       let g:airline#extensions#tabline#left_alt_sep = '|'
 
-      let g:airline#extensions#tabline#show_splits = 0  " enable/disable displaying open splits per tab (only when tabs are opened). >
-      let g:airline#extensions#tabline#show_buffers = 1 " enable/disable displaying buffers with a single tab
-      let g:airline#extensions#tabline#tab_nr_type = 1  " tab number
+      let g:airline#extensions#tabline#show_splits = 1  " enable/disable displaying open splits per tab (only when tabs are opened). >
+      let g:airline#extensions#tabline#show_buffers = 1 " enable/disable displaying buffers with a single tab let g:airline#extensions#tabline#tab_nr_type = 1  " tab number
+
+      let g:airline#extensions#tabline#buffers_label = ''
+
+      let g:airline#extensions#tabline#show_tab_type = 0
+      let g:airline#extensions#tabline#fnamemod = ':p:.'
 
       Plug 'tomasr/molokai'
       Plug 'crusoexia/vim-monokai'
@@ -112,10 +119,10 @@ nnoremap g- 5<C-w><
 nnoremap gn :split<CR>
 nnoremap gv :vsplit<CR>
 
-nnoremap gt :bn<CR>
+nnoremap <silent> gt :bn<CR>
 "nnoremap gT :ls<CR>:b<Space>
-nnoremap gT :Buffers<CR>
-nnoremap gc :BD<CR>
+nnoremap <silent> gT :Buffers<CR>
+nnoremap <silent> gc :BD<CR>
 
 """" Fuzzy finder
 nnoremap <C-t> :Rg<CR>
@@ -129,14 +136,15 @@ nnoremap <C-b>l :NERDTreeFind<CR>
 autocmd VimEnter * NERDTree | wincmd w
 
 """ Save and quit
-nnoremap <leader>w :w<CR>
-nnoremap <leader>q :q<CR>
-nnoremap gq :q<CR>
+nnoremap <silent> <leader>w :w<CR>
+nnoremap <silent> <leader>q :q<CR>
+nnoremap <silent> gq :q<CR>
 
 map - /
 
 "" Clear find selection
-cmap <Esc> :noh<CR>
+"cmap <Esc> :noh<CR>
+nnoremap <silent><esc> :noh<CR><esc>
 
 "" Shortcuts
 """ Edit config
@@ -198,14 +206,8 @@ set clipboard=unnamedplus
 
 :highlight Directory guifg=#AAAAAA ctermfg=grey
 :autocmd UIEnter * GuiPopupmenu 0
-:autocmd UIEnter * GuiFont! FiraCode\ NF:h11
 :autocmd UIEnter * GuiTabline 0
-" set guifont=FiraCode\ NF:h12
 "let g:enable_bold_font = 0
-
-
-
-
 
 """ FZF function for delete buffers
 function! s:list_buffers()
