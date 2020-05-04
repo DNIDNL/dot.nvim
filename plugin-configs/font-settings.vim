@@ -7,7 +7,7 @@ let g:font_type="FiraCode\ NF"
 function IncreaseFont()
    if exists('g:GuiLoaded')
       echo "Increasing"
-      let g:font_size = g:font_size + 1 
+      let g:font_size = g:font_size + 1
       call ResetFont()
    endif
 endfunction
@@ -15,7 +15,7 @@ endfunction
 function DecreaseFont()
    if exists('g:GuiLoaded')
       echo "Decreasing"
-      let g:font_size = g:font_size - 1 
+      let g:font_size = g:font_size - 1
       call ResetFont()
    endif
 endfunction
@@ -29,7 +29,7 @@ endfunction
 
 function ResetSize()
    if exists('g:GuiLoaded')
-      let g:font_size = 11 
+      let g:font_size = 11
       call ResetFont()
    endif
 endfunction
