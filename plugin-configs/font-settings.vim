@@ -1,13 +1,15 @@
 
 ":autocmd UIEnter * GuiFont! FiraCode\ NF:h11
 
-let g:font_size=11
+let g:font_size=10
 let g:font_type="FiraCode\ NF"
+""" let g:font_type="FiraCode\ Nerd\ Font"
+"" let g:font_type="Consolas"
 
 function IncreaseFont()
    if exists('g:GuiLoaded')
       echo "Increasing"
-      let g:font_size = g:font_size + 1
+      let g:font_size = g:font_size + 0.5
       call ResetFont()
    endif
 endfunction
@@ -15,7 +17,7 @@ endfunction
 function DecreaseFont()
    if exists('g:GuiLoaded')
       echo "Decreasing"
-      let g:font_size = g:font_size - 1
+      let g:font_size = g:font_size - 0.5
       call ResetFont()
    endif
 endfunction
@@ -36,6 +38,5 @@ endfunction
 
 nnoremap <silent> <C-+> :call IncreaseFont()<cr>
 nnoremap <silent> <C-_> :call DecreaseFont()<cr>
-nnoremap <silent> <C-0> :call ResetSize()<cr>
+nnoremap <silent> <C-'> :call ResetSize()<cr>
 
-call ResetFont()

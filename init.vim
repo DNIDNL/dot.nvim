@@ -2,9 +2,14 @@
 " vim:foldmethod=marker:foldlevel=0
 " Keymaps
 "" General
-let mapleader = ";"
+let mapleader = " "
 set list
-set timeoutlen=300 ttimeoutlen=300
+set timeoutlen=500 ttimeoutlen=500
+set autoread
+
+"set shell=powershell shellquote=( shellpipe=\| shellxquote=
+"set shellcmdflag=-NoLogo\ -NoProfile\ -ExecutionPolicy\ RemoteSigned\ -Command
+"set shellredir=\|\ Out-File\ -Encoding\ UTF8
 
 " Load plugins
 " == VIM PLUG ================================
@@ -27,11 +32,13 @@ if has('win32')
    endif
 endif
 
+source $LOCALAPPDATA/nvim/plugin-configs/font-settings.vim
+
 call plug#begin('$LOCALAPPDATA\nvim\plugged')
 
       source $LOCALAPPDATA/nvim/plugin-configs/ts-react-stack.vim
-      source $LOCALAPPDATA/nvim/plugin-configs/font-settings.vim
 
+      Plug 'breuckelen/vim-resize'
 
       "" Multiple cursors
       Plug 'terryma/vim-multiple-cursors'
@@ -56,7 +63,6 @@ call plug#begin('$LOCALAPPDATA\nvim\plugged')
       Plug 'ryanoasis/vim-devicons'
       set encoding=UTF-8
 
-
       """ Unix like operations
       Plug 'tpope/vim-eunuch'
 
@@ -69,20 +75,27 @@ call plug#begin('$LOCALAPPDATA\nvim\plugged')
       " let g:airline_theme = 'bubblegum'
       let g:airline_theme = 'deus'
       let g:airline_powerline_fonts = 1
+      
       let g:airline#extensions#tabline#enabled = 1
-      " let g:airline#extensions#tabline#formatter = 'default'
+      let g:airline#extensions#tabline#formatter = 'default'
       " let g:airline#extensions#tabline#formatter = 'jsformatter'
-      let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
+      
+      " let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
       let g:airline#extensions#tabline#left_sep = ' '
       let g:airline#extensions#tabline#left_alt_sep = '|'
 
-      let g:airline#extensions#tabline#show_splits = 1  " enable/disable displaying open splits per tab (only when tabs are opened). >
-      let g:airline#extensions#tabline#show_buffers = 1 " enable/disable displaying buffers with a single tab let g:airline#extensions#tabline#tab_nr_type = 1  " tab number
+      " let g:airline#extensions#tabline#show_splits = 1  " enable/disable displaying open splits per tab (only when tabs are opened). >
+      " let g:airline#extensions#tabline#show_buffers = 1 " enable/disable displaying buffers with a single tab let g:airline#extensions#tabline#tab_nr_type = 1  " tab number
 
       let g:airline#extensions#tabline#buffers_label = ''
 
-      let g:airline#extensions#tabline#show_tab_type = 0
+      let g:airline#extensions#tabline#show_tab_nr = 1
+      let g:airline#extensions#tabline#show_tab_type = 1
+      "let g:airline#extensions#tabline#tab_min_count = 2
+
       let g:airline#extensions#tabline#fnamemod = ':p:.'
+
+      nnoremap <expr><silent> <leader>, &showtabline ? ":set showtabline=0\<cr>" : ":set showtabline=2\<cr>"
 
       Plug 'tomasr/molokai'
       Plug 'crusoexia/vim-monokai'
@@ -99,6 +112,10 @@ call plug#begin('$LOCALAPPDATA\nvim\plugged')
       let g:limelight_paragraph_span = 1
 
       Plug 'qpkorr/vim-bufkill'
+
+
+      "Plug 'ThePrimeagen/vim-be-good'
+
 call plug#end()
 
 "" Buffer management
@@ -111,6 +128,8 @@ nnoremap gJ <C-w>J
 nnoremap gK <C-w>K
 nnoremap gH <C-w>H
 nnoremap gL <C-w>L
+nnoremap gr <C-w>r
+nnoremap gR <C-w>R
 
 nnoremap g= <C-w>=
 nnoremap g+ 5<C-w>>
@@ -120,9 +139,10 @@ nnoremap gn :split<CR>
 nnoremap gv :vsplit<CR>
 
 nnoremap <silent> gt :bn<CR>
-"nnoremap gT :ls<CR>:b<Space>
+
 nnoremap <silent> gT :Buffers<CR>
 nnoremap <silent> gc :BD<CR>
+nnoremap <silent> gq :q<CR>
 
 """" Fuzzy finder
 nnoremap <C-t> :Rg<CR>
@@ -138,7 +158,7 @@ autocmd VimEnter * NERDTree | wincmd w
 """ Save and quit
 nnoremap <silent> <leader>w :w<CR>
 nnoremap <silent> <leader>q :q<CR>
-nnoremap <silent> gq :q<CR>
+nnoremap <silent> <leader>t :tabnext<CR>
 
 map - /
 
@@ -156,6 +176,8 @@ nnoremap <leader>vim :source $LOCALAPPDATA\nvim\init.vim<CR>
 """Ctrl-tab like windows
 nnoremap <C-Tab> :bn<cr>
 
+
+nnoremap <silent> <leader>gs :G<CR>
 
 """" Set local directory
 command CDC cd %:p:h
@@ -227,3 +249,4 @@ command! BDS call fzf#run(fzf#wrap({
   \ 'options': '--multi --reverse --bind ctrl-a:select-all+accept'
   \ }))
 
+au VimEnter * call ResetFont()

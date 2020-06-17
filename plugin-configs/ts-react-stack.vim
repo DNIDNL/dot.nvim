@@ -6,12 +6,20 @@ set nowritebackup
 set updatetime=300
 set signcolumn=yes
 
-" coc for tslinting, auto complete and prettier
-Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'} 
+" Smaller updatetime for CursorHold & CursorHoldI
+set updatetime=300
+" don't give |ins-completion-menu| messages.
+set shortmess+=c
+" always show signcolumns
+set signcolumn=yes " coc for tslinting, auto complete and prettier
+
+
+"Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'} 
+
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " coc extensions 
 let g:coc_global_extensions = ['coc-eslint', 'coc-tsserver', 'coc-emmet', 'coc-css', 'coc-html', 'coc-json', 'coc-yank', 'coc-prettier'] 
-nnoremap <leader>p :CocCommand prettier.formatFile<CR>
 nnoremap <C-k><C-d> :CocCommand prettier.formatFile<CR>
 nnoremap <leader>a :CocAction<CR>
 nmap <A-Cr> <Plug>(coc-fix-current)
@@ -28,12 +36,6 @@ au BufNewFile,BufRead *.ts setlocal filetype=typescript
 au BufNewFile,BufRead *.tsx setlocal filetype=typescript.tsx 
 
 
-" use <tab> for trigger completion and navigate to the next complete item
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~ '\s'
-endfunction
-
 """ Show documentation on button K
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 function! s:show_documentation()
@@ -42,6 +44,12 @@ function! s:show_documentation()
    else
       call CocAction('doHover')
    endif
+endfunction
+
+" use <tab> for trigger completion and navigate to the next complete item
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~ '\s'
 endfunction
 
 inoremap <silent><expr> <Tab>
