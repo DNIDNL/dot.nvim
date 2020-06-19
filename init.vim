@@ -228,8 +228,7 @@ set clipboard=unnamedplus
 :colorscheme monokai
 
 :highlight Directory guifg=#AAAAAA ctermfg=grey
-:autocmd UIEnter * GuiPopupmenu 0
-:autocmd UIEnter * GuiTabline 0
+
 "let g:enable_bold_font = 0
 
 """ FZF function for delete buffers
@@ -251,3 +250,4 @@ command! BDS call fzf#run(fzf#wrap({
   \ }))
 
 au VimEnter * call ResetFont()
+inoremap <M-}> }
