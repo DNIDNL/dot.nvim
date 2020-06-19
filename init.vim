@@ -178,6 +178,7 @@ nnoremap <C-Tab> :bn<cr>
 
 
 nnoremap <silent> <leader>gs :G<CR>
+nnoremap <silent> <leader>gd :Gdiffsplit<CR>
 
 """" Set local directory
 command CDC cd %:p:h
