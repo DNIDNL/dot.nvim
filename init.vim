@@ -4,7 +4,7 @@
 "" General
 let mapleader = " "
 set list
-set timeoutlen=500 ttimeoutlen=500
+set timeoutlen=400 ttimeoutlen=300
 set autoread
 
 "set shell=powershell shellquote=( shellpipe=\| shellxquote=
@@ -75,11 +75,11 @@ call plug#begin('$LOCALAPPDATA\nvim\plugged')
       " let g:airline_theme = 'bubblegum'
       let g:airline_theme = 'deus'
       let g:airline_powerline_fonts = 1
-      
+
       let g:airline#extensions#tabline#enabled = 1
       let g:airline#extensions#tabline#formatter = 'default'
       " let g:airline#extensions#tabline#formatter = 'jsformatter'
-      
+
       " let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
       let g:airline#extensions#tabline#left_sep = ' '
       let g:airline#extensions#tabline#left_alt_sep = '|'

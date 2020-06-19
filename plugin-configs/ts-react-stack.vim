@@ -20,9 +20,9 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " coc extensions 
 let g:coc_global_extensions = ['coc-eslint', 'coc-tsserver', 'coc-emmet', 'coc-css', 'coc-html', 'coc-json', 'coc-yank', 'coc-prettier'] 
-nnoremap <C-k><C-d> :CocCommand prettier.formatFile<CR>
 nnoremap <leader>a :CocAction<CR>
-nmap <A-Cr> <Plug>(coc-fix-current)
+nnoremap <silent><leader>kd :CocCommand prettier.formatFile<CR>
+nmap <silent><leader>kf <Plug>(coc-fix-current)
 
 " Remap keys for gotos and set correct filetype
 au BufNewFile,BufRead *.tsx
