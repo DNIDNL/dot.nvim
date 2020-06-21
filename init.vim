@@ -4,14 +4,21 @@
 "" General
 let mapleader = " "
 set list
-set timeoutlen=400 ttimeoutlen=300
+set timeoutlen=400 ttimeoutlen=30
 set autoread
 
-"set shell=powershell shellquote=( shellpipe=\| shellxquote=
-"set shellcmdflag=-NoLogo\ -NoProfile\ -ExecutionPolicy\ RemoteSigned\ -Command
-"set shellredir=\|\ Out-File\ -Encoding\ UTF8
+set shell=powershell.exe
+set shellpipe=|
+set shellquote= shellpipe=\| shellxquote=
+set shellcmdflag=\ -NoLogo\ -ExecutionPolicy\ RemoteSigned\ -NoProfile\ -Command
+set shellredir=\|\ Out-File\ -Encoding\ UTF8
 
-" Load plugins
+if has('nvim')
+  tnoremap <Esc> <C-\><C-n>
+  tnoremap <M-[> <Esc>
+  tnoremap <C-v><Esc> <Esc>
+endif
+" Load plugin
 " == VIM PLUG ================================
 " Setup plugin manager
 if has('linux')
@@ -104,9 +111,18 @@ call plug#begin('$LOCALAPPDATA\nvim\plugged')
       Plug 'junegunn/fzf', { 'do': './install --bin' }
       Plug 'junegunn/fzf.vim'
 
+      " Always enable preview window on the right with 60% width
+      let g:fzf_preview_window = 'right:60%'
+      
       if executable("rg")
-         :let $FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!node_modules/*" --glob "!.git/*"'
+         ":let $FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!node_modules/*" --glob "!.git/*"'
+         :let $FZF_DEFAULT_COMMAND='git ls-files --cached --others --exclude-standard'
       endif
+
+      command! -bang -nargs=? -complete=dir Files
+          \ call fzf#vim#files(<q-args>, {'options': ['--layout=reverse', '--info=inline', '--preview', 'cat {}']}, <bang>0)
+       "command! -bang -nargs=? -complete=dir Files
+       "    \ call fzf#vim#files(<q-args>, {'options': ['--layout=reverse', '--info=inline']}, <bang>0)
 
       Plug 'junegunn/limelight.vim'
       let g:limelight_paragraph_span = 1
@@ -184,7 +200,8 @@ nnoremap <silent> <leader>gd :Gdiffsplit<CR>
 command CDC cd %:p:h
 
 """" Fuzzy finder
-command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, '--color-path="0;33"', <bang>0)
+"" command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, '--color-path="0;33"', <bang>0)
+
 
 " General editor config
 "" 256 color support

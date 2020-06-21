@@ -3,6 +3,7 @@
 
 let g:font_size=10
 let g:font_type="FiraCode\ NF"
+"" let g:font_type="LiterationMono\ NF"
 """ let g:font_type="FiraCode\ Nerd\ Font"
 "" let g:font_type="Consolas"
 
@@ -36,7 +37,7 @@ function ResetSize()
    endif
 endfunction
 
-nnoremap <silent> <C-+> :call IncreaseFont()<cr>
+nnoremap <silent> <C--> :call IncreaseFont()<cr>
 nnoremap <silent> <C-_> :call DecreaseFont()<cr>
 nnoremap <silent> <C-'> :call ResetSize()<cr>
 
