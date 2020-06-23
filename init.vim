@@ -1,4 +1,3 @@
-
 " vim:foldmethod=marker:foldlevel=0
 " Keymaps
 "" General
@@ -6,18 +5,8 @@ let mapleader = " "
 set list
 set timeoutlen=400 ttimeoutlen=30
 set autoread
+set ff=unix
 
-set shell=powershell.exe
-set shellpipe=|
-set shellquote= shellpipe=\| shellxquote=
-set shellcmdflag=\ -NoLogo\ -ExecutionPolicy\ RemoteSigned\ -NoProfile\ -Command
-set shellredir=\|\ Out-File\ -Encoding\ UTF8
-
-if has('nvim')
-  tnoremap <Esc> <C-\><C-n>
-  tnoremap <M-[> <Esc>
-  tnoremap <C-v><Esc> <Esc>
-endif
 " Load plugin
 " == VIM PLUG ================================
 " Setup plugin manager
@@ -40,6 +29,8 @@ if has('win32')
 endif
 
 source $LOCALAPPDATA/nvim/plugin-configs/font-settings.vim
+source $LOCALAPPDATA/nvim/plugin-configs/terminal.vim
+source $LOCALAPPDATA/nvim/plugin-configs/fzf.vim
 
 call plug#begin('$LOCALAPPDATA\nvim\plugged')
 
@@ -111,19 +102,6 @@ call plug#begin('$LOCALAPPDATA\nvim\plugged')
       Plug 'junegunn/fzf', { 'do': './install --bin' }
       Plug 'junegunn/fzf.vim'
 
-      " Always enable preview window on the right with 60% width
-      let g:fzf_preview_window = 'right:60%'
-      
-      if executable("rg")
-         ":let $FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!node_modules/*" --glob "!.git/*"'
-         :let $FZF_DEFAULT_COMMAND='git ls-files --cached --others --exclude-standard'
-      endif
-
-      command! -bang -nargs=? -complete=dir Files
-          \ call fzf#vim#files(<q-args>, {'options': ['--layout=reverse', '--info=inline', '--preview', 'cat {}']}, <bang>0)
-       "command! -bang -nargs=? -complete=dir Files
-       "    \ call fzf#vim#files(<q-args>, {'options': ['--layout=reverse', '--info=inline']}, <bang>0)
-
       Plug 'junegunn/limelight.vim'
       let g:limelight_paragraph_span = 1
 
@@ -150,6 +128,8 @@ nnoremap gR <C-w>R
 nnoremap g= <C-w>=
 nnoremap g+ 5<C-w>>
 nnoremap g- 5<C-w><
+nnoremap g_ <C-w>_
+nnoremap g\| <C-w>\|
 
 nnoremap gn :split<CR>
 nnoremap gv :vsplit<CR>
@@ -197,10 +177,7 @@ nnoremap <silent> <leader>gs :G<CR>
 nnoremap <silent> <leader>gd :Gdiffsplit<CR>
 
 """" Set local directory
-command CDC cd %:p:h
-
-"""" Fuzzy finder
-"" command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, '--color-path="0;33"', <bang>0)
+command! CDC cd %:p:h
 
 
 " General editor config
@@ -247,24 +224,6 @@ set clipboard=unnamedplus
 :highlight Directory guifg=#AAAAAA ctermfg=grey
 
 "let g:enable_bold_font = 0
-
-""" FZF function for delete buffers
-function! s:list_buffers()
-  redir => list
-  silent ls
-  redir END
-  return split(list, "\n")
-endfunction
-
-function! s:delete_buffers(lines)
-  execute 'bwipeout' join(map(a:lines, {_, line -> split(line)[0]}))
-endfunction
-
-command! BDS call fzf#run(fzf#wrap({
-  \ 'source': s:list_buffers(),
-  \ 'sink*': { lines -> s:delete_buffers(lines) },
-  \ 'options': '--multi --reverse --bind ctrl-a:select-all+accept'
-  \ }))
 
 au VimEnter * call ResetFont()
 inoremap <M-}> }
