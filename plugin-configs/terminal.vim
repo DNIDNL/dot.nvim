@@ -15,4 +15,4 @@ func StartShell()
    normal 15g_
 endfunction
 
-nnoremap <silent><C-`> :exec StartShell()<Cr>
+nnoremap <silent><C-´> :exec StartShell()<Cr>

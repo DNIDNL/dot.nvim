@@ -10,7 +10,7 @@ call plug#begin('$LOCALAPPDATA\nvim\plugged')
 
       if executable("bat")
       command! -bang -nargs=? -complete=dir Files
-            \ call fzf#vim#files(<q-args>, {'options': ['--height', '80%', '--color=border:#707070', '--bind=ctrl-d:preview-page-down,ctrl-u:preview-page-up,alt-j:preview-down,alt-k:preview-up', '--layout=reverse', '--info=inline', '--preview', 'bat --theme "Monokai Extended" --color always --style plain {}']}, <bang>0)
+            \ call fzf#vim#files(<q-args>, {'options': ['--height', '80%', '--color=border:#404040', '--bind=ctrl-d:preview-page-down,ctrl-u:preview-page-up,alt-j:preview-down,alt-k:preview-up', '--layout=reverse', '--info=inline', '--preview', 'bat --theme "Monokai Extended Bright" --color always --style plain {}']}, <bang>0)
       endif
 
       """" Fuzzy finder
