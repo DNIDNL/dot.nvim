@@ -70,3 +70,6 @@ Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
 
 
 nmap <silent> <Leader>j <Plug>(coc-diagnostic-next-error)
+nmap <silent> <Leader>J <Plug>(coc-diagnostic-prev-error)
+nmap <silent> <F8> <Plug>(coc-diagnostic-next)
+nmap <silent> <S-F8> <Plug>(coc-diagnostic-prev)

@@ -9,8 +9,21 @@ call plug#begin('$LOCALAPPDATA\nvim\plugged')
       :let $FZF_DEFAULT_COMMAND='git ls-files --cached --others --exclude-standard'
 
       if executable("bat")
-      command! -bang -nargs=? -complete=dir Files
-            \ call fzf#vim#files(<q-args>, {'options': ['--height', '80%', '--color=border:#404040', '--bind=ctrl-d:preview-page-down,ctrl-u:preview-page-up,alt-j:preview-down,alt-k:preview-up', '--layout=reverse', '--info=inline', '--preview', 'bat --theme "Monokai Extended Bright" --color always --style plain {}']}, <bang>0)
+         let s:bind_opts = '--bind=ctrl-d:preview-page-down,ctrl-u:preview-page-up,alt-j:preview-down,alt-k:preview-up'
+         let s:preview_opts =  '--preview=bat --theme "Monokai Extended Bright" --style plain,numbers  --color always '
+
+         command! -bang -nargs=? -complete=dir Files call fzf#vim#files(<q-args>, {'options': ['--color=border:#404040',
+                                                                                                \ '--layout=reverse',
+                                                                                                \ '--info=inline',
+                                                                                                \ s:bind_opts,
+                                                                                                \ s:preview_opts . '{}'], 'down':'50%'}, <bang>0)
+
+         command! -bang -nargs=? Buffers call fzf#vim#buffers({'options': ['--color=border:#404040',
+                                                                              \ '--layout=reverse',
+                                                                              \ '--info=inline',
+                                                                              \ '--preview-window=50%',
+                                                                              \ s:bind_opts,
+                                                                              \ s:preview_opts . "{3}" ], 'down': '40%'}, <bang>0)
       endif
 
       """" Fuzzy finder
@@ -33,4 +46,9 @@ call plug#begin('$LOCALAPPDATA\nvim\plugged')
         \ 'sink*': { lines -> s:delete_buffers(lines) },
         \ 'options': '--multi --reverse --bind ctrl-a:select-all+accept'
         \ }))
+
+
+
+
+
 call plug#end()

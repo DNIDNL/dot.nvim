@@ -37,6 +37,7 @@ call plug#begin('$LOCALAPPDATA\nvim\plugged')
       source $LOCALAPPDATA/nvim/plugin-configs/ts-react-stack.vim
 
       Plug 'breuckelen/vim-resize'
+      let g:resize_count = 4
 
       "" Multiple cursors
       Plug 'terryma/vim-multiple-cursors'
