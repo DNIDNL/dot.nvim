@@ -37,13 +37,13 @@ call plug#begin('$LOCALAPPDATA\nvim\plugged')
         return split(list, "\n")
       endfunction
 
-      function! s:delete_buffers(lines)
-        execute 'bwipeout' join(map(a:lines, {_, line -> split(line)[0]}))
+      function! s:delete_buffers(lines, bang)
+        execute 'bwipeout'. ((a:bang) ? "! " : " ") . join(map(a:lines, {_, line -> split(line)[0]}))
       endfunction
 
-      command! BDS call fzf#run(fzf#wrap({
+      command! -bang BDS call fzf#run(fzf#wrap({
         \ 'source': s:list_buffers(),
-        \ 'sink*': { lines -> s:delete_buffers(lines) },
+        \ 'sink*': { lines -> s:delete_buffers(lines, <bang>0) },
         \ 'options': '--multi --reverse --bind ctrl-a:select-all+accept'
         \ }))
 
