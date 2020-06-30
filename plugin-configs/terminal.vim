@@ -16,3 +16,4 @@ func StartShell()
 endfunction
 
 nnoremap <silent><C-´> :exec StartShell()<Cr>
+nnoremap <silent> :exec StartShell()<Cr>

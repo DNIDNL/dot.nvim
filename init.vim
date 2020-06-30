@@ -6,7 +6,7 @@ set list
 set timeoutlen=400 ttimeoutlen=30
 set autoread
 set ff=unix
-set ffs=unix
+set ffs=unix,dos
 set diffopt+=iwhite
 let g:sessions_dir = "~/AppData/nvim"
 
