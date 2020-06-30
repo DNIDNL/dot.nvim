@@ -6,6 +6,9 @@ set list
 set timeoutlen=400 ttimeoutlen=30
 set autoread
 set ff=unix
+set ffs=unix
+set diffopt+=iwhite
+let g:sessions_dir = "~/AppData/nvim"
 
 " Load plugin
 " == VIM PLUG ================================
@@ -31,6 +34,7 @@ endif
 source $LOCALAPPDATA/nvim/plugin-configs/font-settings.vim
 source $LOCALAPPDATA/nvim/plugin-configs/terminal.vim
 source $LOCALAPPDATA/nvim/plugin-configs/fzf.vim
+source $LOCALAPPDATA/nvim/plugin-configs/custom-functions.vim
 
 call plug#begin('$LOCALAPPDATA\nvim\plugged')
 
@@ -113,6 +117,13 @@ call plug#begin('$LOCALAPPDATA\nvim\plugged')
 
 call plug#end()
 
+"" NerdMode
+noremap <Up> <Nop>
+noremap <Down> <Nop>
+noremap <Left> <Nop>
+noremap <Right> <Nop>
+
+
 "" Buffer management
 nnoremap gj <C-w>j
 nnoremap gk <C-w>k
@@ -139,6 +150,7 @@ nnoremap <silent> gt :bn<CR>
 
 nnoremap <silent> gT :Buffers<CR>
 nnoremap <silent> gc :BD<CR>
+nnoremap <silent> gW :BDS<CR>
 nnoremap <silent> gq :q<CR>
 
 """" Fuzzy finder
@@ -180,6 +192,7 @@ nnoremap <silent> <leader>gd :Gdiffsplit<CR>
 """" Set local directory
 command! CDC cd %:p:h
 
+exec 'nnoremap <leader>so :so ' . g:sessions_dir . '/'
 
 " General editor config
 "" 256 color support
