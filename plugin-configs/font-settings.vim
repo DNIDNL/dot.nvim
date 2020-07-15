@@ -37,7 +37,7 @@ function ResetSize()
    endif
 endfunction
 
-nnoremap <silent> <C--> :call IncreaseFont()<cr>
-nnoremap <silent> <C-_> :call DecreaseFont()<cr>
+nnoremap <silent> <M-Up> :call IncreaseFont()<cr>
+nnoremap <silent> <M-Down> :call DecreaseFont()<cr>
 nnoremap <silent> <C-'> :call ResetSize()<cr>
 
