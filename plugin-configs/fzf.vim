@@ -3,10 +3,10 @@ call plug#begin('$LOCALAPPDATA\nvim\plugged')
       let g:fzf_preview_window = 'right:30%'
 
       if executable("rg")
-      ":let $FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!node_modules/*" --glob "!.git/*"'
+      :let $FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!node_modules/*" --glob "!.git/*"'
       endif
 
-      :let $FZF_DEFAULT_COMMAND='git ls-files --cached --others --exclude-standard'
+      ":let $FZF_DEFAULT_COMMAND='git ls-files --cached --others --exclude-standard'
 
       if executable("bat")
          let s:bind_opts = '--bind=ctrl-d:preview-page-down,ctrl-u:preview-page-up,alt-j:preview-down,alt-k:preview-up'
@@ -23,7 +23,15 @@ call plug#begin('$LOCALAPPDATA\nvim\plugged')
                                                                               \ '--info=inline',
                                                                               \ '--preview-window=50%',
                                                                               \ s:bind_opts,
-                                                                              \ s:preview_opts . "{3}" ], 'down': '40%'}, <bang>0)
+                                                                              \ s:preview_opts . "{1}" ], 'down': '40%'}, <bang>0)
+
+         command! -bang -nargs=? -complete=dir Rg call fzf#vim#grep('rg --max-columns 100 --glob !public/** --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1, {'options': ['--color=border:#404040',
+                                                                                                \ '--layout=reverse',
+                                                                                                \ '--info=inline',
+                                                                                                \ '--delimiter=:','--nth=2..',
+                                                                                                \ s:bind_opts,
+                                                                                                \ s:preview_opts . '{1}'], 'down':'50%'}, <bang>0)
+
       endif
 
       """" Fuzzy finder

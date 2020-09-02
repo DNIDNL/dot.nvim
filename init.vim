@@ -10,7 +10,7 @@ set diffopt+=iwhite
 let g:sessions_dir = "~/AppData/nvim"
 
 source $LOCALAPPDATA/nvim/plugin-configs/font-settings.vim
-source $LOCALAPPDATA/nvim/plugin-configs/terminal.vim
+" source $LOCALAPPDATA/nvim/plugin-configs/terminal.vim
 source $LOCALAPPDATA/nvim/plugin-configs/fzf.vim
 source $LOCALAPPDATA/nvim/plugin-configs/custom-functions.vim
 source $LOCALAPPDATA/nvim/plugin-configs/plugins.vim
@@ -87,11 +87,14 @@ nnoremap <C-Tab> :bn<cr>
 
 nnoremap <silent> <leader>gs :G<CR>
 nnoremap <silent> <leader>gd :Gdiffsplit<CR>
+nnoremap <silent> <leader>gb :Gblame<CR>
+exec 'nnoremap <leader>so :so ' . g:sessions_dir . '/'
+
 
 """" Set local directory
 command! CDC cd %:p:h
-
-exec 'nnoremap <leader>so :so ' . g:sessions_dir . '/'
+""" Clears the quickfix window
+command! ClearQuickfixList cexpr []
 
 " General editor config
 "" 256 color support

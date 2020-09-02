@@ -3,11 +3,11 @@
 set cmdheight=1
 set nobackup
 set nowritebackup
-set updatetime=1000
 set signcolumn=yes
 
 " Smaller updatetime for CursorHold & CursorHoldI
-set updatetime=300
+set updatetime=500
+"
 " don't give |ins-completion-menu| messages.
 set shortmess+=c
 " always show signcolumns
@@ -16,6 +16,7 @@ set signcolumn=yes " coc for tslinting, auto complete and prettier
 
 "Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'} 
 
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " coc extensions 
 let g:coc_global_extensions = ['coc-eslint', 'coc-tsserver', 'coc-emmet', 'coc-css', 'coc-html', 'coc-json', 'coc-yank', 'coc-prettier'] 
