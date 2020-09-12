@@ -85,6 +85,8 @@ inoremap <silent><expr> <c-space> coc#refresh()
 " Add syntax higlightning for comments inside json files
 autocmd FileType json syntax match Comment +\/\/.\+$+
 
+"autocmd CursorHold * silent call CocActionAsync('highlight')
+"
 "" Syntax highlight for typescript
 Plug 'HerringtonDarkholme/yats.vim'
 
