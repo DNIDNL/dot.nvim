@@ -1,5 +1,4 @@
 "------------------------ COC ----------------------- 
-" Requirement -> Plug 'neoclide/coc.nvim', {'branch': 'release'}
 set cmdheight=1
 set nobackup
 set nowritebackup
@@ -10,13 +9,14 @@ set updatetime=500
 "
 " don't give |ins-completion-menu| messages.
 set shortmess+=c
+
 " always show signcolumns
 set signcolumn=yes " coc for tslinting, auto complete and prettier
-
 
 "Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'} 
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
 
 " coc extensions 
 let g:coc_global_extensions = ['coc-eslint', 'coc-tsserver', 'coc-emmet', 'coc-css', 'coc-html', 'coc-json', 'coc-yank', 'coc-prettier'] 
@@ -86,11 +86,16 @@ inoremap <silent><expr> <c-space> coc#refresh()
 autocmd FileType json syntax match Comment +\/\/.\+$+
 
 "" Syntax highlight for typescript
+Plug 'leafgarland/typescript-vim'
+Plug 'peitalin/vim-jsx-typescript'
 Plug 'HerringtonDarkholme/yats.vim'
 
-Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
 
-
+" Plug 'pangloss/vim-javascript'    " JavaScript support
+" Plug 'leafgarland/typescript-vim' " TypeScript syntax
+" Plug 'maxmellon/vim-jsx-pretty'   " JS and JSX syntax
+" Plug 'jparise/vim-graphql'        " GraphQL syntax
+" Plug 'ianks/vim-tsx'
 
 nmap <silent> <Leader>j <Plug>(coc-diagnostic-next-error)
 nmap <silent> <Leader>J <Plug>(coc-diagnostic-prev-error)
