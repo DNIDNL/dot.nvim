@@ -8,9 +8,10 @@ set ff=unix
 set ffs=unix,dos
 set diffopt+=iwhite
 let g:sessions_dir = "~/AppData/nvim"
+set hid
 
 source $LOCALAPPDATA/nvim/plugin-configs/font-settings.vim
-" source $LOCALAPPDATA/nvim/plugin-configs/terminal.vim
+source $LOCALAPPDATA/nvim/plugin-configs/terminal.vim
 source $LOCALAPPDATA/nvim/plugin-configs/fzf.vim
 source $LOCALAPPDATA/nvim/plugin-configs/custom-functions.vim
 source $LOCALAPPDATA/nvim/plugin-configs/plugins.vim
@@ -73,6 +74,8 @@ map - /
 "" Clear find selection
 "cmap <Esc> :noh<CR>
 nnoremap <silent><esc> :noh<CR><esc>
+
+nnoremap <silent><C-l> :e <CR> <BAR> :redraw <CR>
 
 "" Shortcuts
 """ Edit config

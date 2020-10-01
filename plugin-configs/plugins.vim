@@ -62,8 +62,8 @@ call plug#begin('$LOCALAPPDATA\nvim\plugged')
       let g:airline_powerline_fonts = 1
 
       let g:airline#extensions#tabline#enabled = 1
-      let g:airline#extensions#tabline#formatter = 'default'
-      " let g:airline#extensions#tabline#formatter = 'jsformatter'
+      " let g:airline#extensions#tabline#formatter = 'default'
+      let g:airline#extensions#tabline#formatter = 'jsformatter'
 
       " let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
       let g:airline#extensions#tabline#left_sep = ' '
@@ -86,7 +86,8 @@ call plug#begin('$LOCALAPPDATA\nvim\plugged')
       Plug 'crusoexia/vim-monokai'
 
       """" Fuzzy finder
-      Plug 'junegunn/fzf', { 'do': './install --bin' }
+      "Plug 'junegunn/fzf', { 'do': './install --bin' }
+      Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
       Plug 'junegunn/fzf.vim'
 
       Plug 'junegunn/limelight.vim'
@@ -94,7 +95,12 @@ call plug#begin('$LOCALAPPDATA\nvim\plugged')
 
       Plug 'qpkorr/vim-bufkill'
 
-
       "Plug 'ThePrimeagen/vim-be-good'
+
+      Plug 'preservim/nerdcommenter'
+
+      let g:NERDSpaceDelims = 1
+
+      let g:NERDDefaultAlign = 'left'
 
 call plug#end()
